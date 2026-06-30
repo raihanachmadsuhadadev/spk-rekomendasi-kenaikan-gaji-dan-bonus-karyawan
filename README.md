@@ -1,61 +1,211 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SPK Kenaikan Gaji dan Bonus Karyawan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Sistem Pendukung Keputusan (SPK) untuk rekomendasi kenaikan gaji dan bonus karyawan pada PT Alvarel Technology Innovation.
 
-## About Laravel
+Project ini dibuat sebagai aplikasi portfolio berbasis Laravel. Sistem mengelola data karyawan, KPI umum, KPI divisi, penilaian antar karyawan, pembobotan AHP, leaderboard, serta rekomendasi bonus dan kenaikan gaji.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tujuan Aplikasi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi ini membantu owner, HR, leader, dan karyawan dalam proses evaluasi performa berbasis data. Penilaian dilakukan melalui kombinasi:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- KPI umum
+- KPI divisi
+- Peer assessment
+- Bobot AHP global
+- Realisasi target bulanan
+- Hasil rekomendasi bonus dan kenaikan gaji
 
-## Learning Laravel
+## Fitur Utama
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Login dan logout multi-role
+- Dashboard owner
+- Dashboard HR
+- Dashboard leader
+- Dashboard karyawan
+- Manajemen divisi
+- Manajemen user dan karyawan
+- Manajemen KPI umum
+- Pembobotan KPI umum dengan AHP
+- Realisasi KPI umum
+- Manajemen KPI divisi
+- Pembobotan KPI divisi dengan AHP
+- Distribusi target KPI divisi
+- Realisasi KPI divisi kuantitatif
+- Realisasi KPI divisi kualitatif
+- Realisasi KPI divisi response
+- Realisasi KPI divisi persentase
+- Aspek penilaian karyawan
+- Peer assessment
+- Leaderboard global, karyawan, dan divisi
+- Rekomendasi bonus
+- Rekomendasi kenaikan gaji
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Laravel 12
+- PostgreSQL
+- Blade Template
+- Vite
+- Bootstrap/Sneat assets
+- Composer
+- NPM
 
-## Laravel Sponsors
+## Periode Demo
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Data demo portfolio difokuskan pada:
 
-### Premium Partners
+```text
+Agustus 2025
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Gunakan periode tersebut saat mengecek dashboard, realisasi KPI, leaderboard, rekomendasi bonus, dan rekomendasi kenaikan gaji.
 
-## Contributing
+## Instalasi
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Clone repository:
 
-## Code of Conduct
+```bash
+git clone <repository-url>
+cd spk_rekomendasi_kenaikan_gaji_dan_bonus-main
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Install dependency backend:
 
-## Security Vulnerabilities
+```bash
+composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install dependency frontend:
 
-## License
+```bash
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Salin file environment:
+
+```bash
+cp .env.example .env
+```
+
+Generate app key:
+
+```bash
+php artisan key:generate
+```
+
+## Konfigurasi PostgreSQL
+
+Buat database PostgreSQL lokal, misalnya:
+
+```text
+spk_alvarel_portfolio
+```
+
+Atur `.env`:
+
+```env
+APP_NAME="SPK Alvarel Portfolio"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://127.0.0.1:9200
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=spk_alvarel_portfolio
+DB_USERNAME=postgres
+DB_PASSWORD=
+
+SESSION_DRIVER=file
+CACHE_STORE=file
+QUEUE_CONNECTION=sync
+```
+
+Sesuaikan `DB_USERNAME` dan `DB_PASSWORD` dengan konfigurasi PostgreSQL lokal.
+
+## Migrasi dan Seeder
+
+Reset database dan isi data demo:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Bersihkan cache konfigurasi jika diperlukan:
+
+```bash
+php artisan optimize:clear
+```
+
+## Menjalankan Aplikasi
+
+Jalankan Laravel server:
+
+```bash
+php -S 127.0.0.1:9200 -t public
+```
+
+Jalankan Vite di terminal lain:
+
+```bash
+npm run dev
+```
+
+Buka aplikasi:
+
+```text
+http://127.0.0.1:9200
+```
+
+Gunakan host yang konsisten. Jangan mencampur `localhost` dan `127.0.0.1` agar session/cookie tidak bermasalah.
+
+## Akun Demo
+
+Semua akun demo menggunakan password:
+
+```text
+password
+```
+
+| Role | Username |
+| --- | --- |
+| Owner | owner |
+| HR | hradmin |
+| Leader Technical Support | saepul |
+| Leader Chat Sales | diar |
+| Leader Creatif Desain | cahyono |
+| Karyawan | handika |
+| Karyawan | devan |
+| Karyawan | rizal |
+| Karyawan | ariyani |
+| Karyawan | akmal |
+| Karyawan | ratna |
+| Karyawan | laela |
+
+## Halaman Yang Disarankan Untuk Demo
+
+Gunakan periode Agustus 2025 saat mengecek halaman berikut:
+
+- Dashboard HR
+- Dashboard owner
+- Dashboard leader
+- Dashboard karyawan
+- Data Divisi
+- Data User
+- KPI Umum
+- Bobot KPI Umum
+- Realisasi KPI Umum
+- KPI Divisi
+- Bobot KPI Divisi
+- Distribusi Target KPI Divisi
+- Realisasi KPI Divisi
+- Aspek Penilaian
+- Peer Assessment
+- Leaderboard
+- Rekomendasi Bonus
+- Rekomendasi Kenaikan Gaji
+
+## Catatan Portfolio
+
+Project ini adalah aplikasi skripsi/portfolio lama yang sedang dirapikan secara bertahap. Refactor dilakukan ringan dan aman tanpa mengubah formula SPK/AHP utama, struktur database besar, atau flow role/access aplikasi.
