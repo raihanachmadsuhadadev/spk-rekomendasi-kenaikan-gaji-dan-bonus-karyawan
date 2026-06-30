@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\AhpGlobalWeight;
+use App\Models\KpiDivisi;
+use App\Models\KpiDivisiDistribution;
+use App\Models\KpiUmum;
 
 // KPI Umum
 use App\Models\KpiUmumRealization;
@@ -73,6 +76,7 @@ class DashboardController extends Controller
             'topGlobal'  => $topGlobal,
             'topInDivisi'=> $topInDivisi,
             'topDivisi'  => $topDivisi,
+            'hrSummary'  => $me->role === 'hr' ? $this->buildHrSummary($bulan, $tahun) : [],
         ]);
     }
 
@@ -93,6 +97,51 @@ class DashboardController extends Controller
     {
         $now = Carbon::now();
         return [(int)$r->input('bulan', $now->month), (int)$r->input('tahun', $now->year)];
+    }
+
+    private function buildHrSummary(int $bulan, int $tahun): array
+    {
+        $kpiDivisiStatuses = [
+            'kuantitatif' => $this->statusCounts(KpiDivisiKuantitatifRealization::query(), $bulan, $tahun),
+            'kualitatif' => $this->statusCounts(KpiDivisiKualitatifRealization::query(), $bulan, $tahun),
+            'response' => $this->statusCounts(KpiDivisiResponseRealization::query(), $bulan, $tahun),
+            'persentase' => $this->statusCounts(KpiDivisiPersentaseRealization::query(), $bulan, $tahun),
+        ];
+
+        return [
+            'totalKaryawan' => User::where('role', 'karyawan')->count(),
+            'totalDivisi' => Division::count(),
+            'totalKpiUmum' => KpiUmum::where('bulan', $bulan)->where('tahun', $tahun)->count(),
+            'totalKpiDivisi' => KpiDivisi::where('bulan', $bulan)->where('tahun', $tahun)->count(),
+            'kpiUmumStatus' => $this->statusCounts(KpiUmumRealization::query(), $bulan, $tahun),
+            'kpiDivisiDistributionStatus' => $this->statusCounts(KpiDivisiDistribution::query(), $bulan, $tahun),
+            'kpiDivisiRealizationStatus' => $kpiDivisiStatuses,
+            'peerAssessment' => [
+                'total' => PeerAssessment::where('bulan', $bulan)->where('tahun', $tahun)->count(),
+                'submitted' => PeerAssessment::where('bulan', $bulan)
+                    ->where('tahun', $tahun)
+                    ->whereNotNull('submitted_at')
+                    ->count(),
+            ],
+        ];
+    }
+
+    private function statusCounts($query, int $bulan, int $tahun): array
+    {
+        $counts = (clone $query)
+            ->select('status', DB::raw('COUNT(*) as total'))
+            ->where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->groupBy('status')
+            ->pluck('total', 'status')
+            ->all();
+
+        return [
+            'submitted' => (int) ($counts['submitted'] ?? 0),
+            'approved' => (int) ($counts['approved'] ?? 0),
+            'rejected' => (int) ($counts['rejected'] ?? 0),
+            'stale' => (int) ($counts['stale'] ?? 0),
+        ];
     }
 
     /** Ambil bobot AHP global (mendukung kolom w_* maupun non-w_*), lalu normalisasi. */
