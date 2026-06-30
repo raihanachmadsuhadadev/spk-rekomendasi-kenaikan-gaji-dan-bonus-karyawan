@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 use App\Models\Division;
+use App\Models\Aspek;
 use App\Models\PeerAssessment;
 use App\Models\PeerAssessmentItem;
 
@@ -67,6 +68,15 @@ class PeerAssessmentSeeder extends Seeder
             for ($dt = $start; $dt <= $end; $dt = $dt->modify('+1 month')) {
                 $bulan = (int)$dt->format('n');
                 $tahun = (int)$dt->format('Y');
+                $aspekIds = Aspek::where('bulan', $bulan)
+                    ->where('tahun', $tahun)
+                    ->orderBy('nama')
+                    ->pluck('id')
+                    ->values();
+
+                if ($has_aspek_id && $aspekIds->isEmpty()) {
+                    continue;
+                }
 
                 foreach ($employees as $assessee) {
                     $assessors = $employees->where('id', '!=', $assessee->id)->values();
@@ -116,7 +126,7 @@ class PeerAssessmentSeeder extends Seeder
 
                             // Isi aspek_id jika ada (1..5). Ini yang mencegah error NOT NULL.
                             if ($has_aspek_id) {
-                                $payload['aspek_id'] = $i + 1;
+                                $payload['aspek_id'] = $aspekIds[$i] ?? $aspekIds->last();
                             }
 
                             // Jika ada kolom aspek berbasis teks/kode, isi juga (opsional)
