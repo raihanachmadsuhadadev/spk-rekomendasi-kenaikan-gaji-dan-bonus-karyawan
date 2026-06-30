@@ -26,7 +26,10 @@ class AhpKpiWeightSeeder extends Seeder
         $umumDefs = [
             'JT' => [
                 'name'    => 'Jumlah Tugas Diselesaikan Tepat Waktu',
-                'aliases' => ['Jumlah Tugas Diselesaikan Tepat Waktu'],
+                'aliases' => [
+                    'Jumlah Tugas Diselesaikan Tepat Waktu',
+                    'Jumlah Target Yang Diselesaikan Tepat Waktu',
+                ],
                 'tipe'    => 'kuantitatif',
                 'satuan'  => 'Tugas',
                 'target'  => 40,

@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +11,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
+        $this->call([
+            DivisionSeeder::class,
+            UserSeeder::class,
+            KpiUmumSeeder::class,
+            KpiDivisiSeeder::class,
+            AhpKpiWeightSeeder::class,
+            AhpGlobalWeightSeeder::class,
+            AspekSeeder::class,
+            KpiDivisiKuantitatifDistributionSeeder::class,
+            KpiUmumRealisasiSeeder::class,
+            KpiDivisiKuantitatifRealizationSeeder::class,
+            KpiDivisiKualitatifRealizationSeeder::class,
+            KpiDivisiResponseRealizationSeeder::class,
+            KpiDivisiPersentaseRealizationSeeder::class,
+            PeerAssessmentSeeder::class,
+        ]);
     }
 }
