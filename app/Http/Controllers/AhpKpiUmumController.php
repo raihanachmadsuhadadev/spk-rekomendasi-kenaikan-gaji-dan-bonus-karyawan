@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\KpiUmum;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AhpKpiUmumController extends Controller
@@ -21,11 +21,6 @@ class AhpKpiUmumController extends Controller
         '9' => 'Sangat-sangat lebih penting (9)',
     ];
 
-    private array $bulanList = [
-        1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',
-        7=>'Juli',8=>'Agustus',9=>'September',10=>'Oktober',11=>'November',12=>'Desember'
-    ];
-
     public function index(Request $request)
     {
         // Bulan & tahun boleh kosong (null)
@@ -33,21 +28,18 @@ class AhpKpiUmumController extends Controller
         $tahun = $request->filled('tahun') ? (int)$request->input('tahun') : null;
 
         // List bulan untuk dropdown
-        $bulanList = [
-            1=>'Januari',2=>'Februari',3=>'Maret',4=>'April',5=>'Mei',6=>'Juni',
-            7=>'Juli',8=>'Agustus',9=>'September',10=>'Oktober',11=>'November',12=>'Desember'
-        ];
+        $bulanList = $this->bulanList();
 
         // List tahun sederhana (mis. Y-5 .. Y+5). Bisa Anda ganti ke DISTINCT dari DB bila perlu.
         $currentY = (int)date('Y');
         $tahunList = range($currentY - 5, $currentY + 5);
 
-        // Jika salah satu belum dipilih → kosongkan data
+        // Jika salah satu belum dipilih -> kosongkan data
         if (is_null($bulan) || is_null($tahun)) {
             $kpis = collect();
             $pairs = [];
         } else {
-            $kpis = \App\Models\KpiUmum::where('bulan', $bulan)->where('tahun', $tahun)
+            $kpis = KpiUmum::where('bulan', $bulan)->where('tahun', $tahun)
                 ->orderBy('nama')->get();
 
             $pairs = [];
@@ -69,7 +61,6 @@ class AhpKpiUmumController extends Controller
         ]);
     }
 
-
     public function hitung(Request $request)
     {
         $validated = $request->validate([
@@ -88,7 +79,7 @@ class AhpKpiUmumController extends Controller
             return back()->with('error', 'Minimal 2 KPI pada bulan & tahun tersebut.')->withInput();
         }
 
-        // Parse nilai dropdown menjadi float (termasuk 1/3 → 0.333..)
+        // Parse nilai dropdown menjadi float (termasuk 1/3 -> 0.333..)
         $parse = function(string $s): float {
             if (str_contains($s, '/')) {
                 [$a,$b] = explode('/',$s,2);
@@ -103,7 +94,7 @@ class AhpKpiUmumController extends Controller
 
         // Ambil semua pasangan i<j dari request: name="pair_{id1}_{id2}"
         // dan isi A[i][j] sesuai KPI urutan
-        $idIndex = []; // map id → index
+        $idIndex = []; // map id -> index
         foreach ($kpis as $idx => $k) $idIndex[$k->id] = $idx;
 
         foreach ($request->all() as $key => $val) {
@@ -139,7 +130,7 @@ class AhpKpiUmumController extends Controller
             $colSum[$j] = $s;
         }
 
-        // 2) Normalisasi kolom & rata-rata baris → eigenvector (bobot)
+        // 2) Normalisasi kolom & rata-rata baris -> eigenvector (bobot)
         $norm = array_fill(0, $n, array_fill(0, $n, 0.0));
         for ($i=0; $i<$n; $i++) {
             for ($j=0; $j<$n; $j++) {
@@ -153,7 +144,7 @@ class AhpKpiUmumController extends Controller
             $w[$i] = $sumRow / $n;
         }
 
-        // 3) Hitung λ_max via (A*w)/w → rata-rata
+        // 3) Hitung lambda_max via (A*w)/w -> rata-rata
         $Aw = array_fill(0, $n, 0.0);
         for ($i=0; $i<$n; $i++) {
             $s = 0.0;
