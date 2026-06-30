@@ -4,6 +4,51 @@
 
 <head>
     @include('layouts.component.head')
+    <style>
+        .portfolio-navbar-title {
+            min-width: 0;
+        }
+
+        .portfolio-demo-badge {
+            background: rgba(105, 108, 255, .12);
+            border: 1px solid rgba(105, 108, 255, .18);
+            color: #696cff;
+        }
+
+        .portfolio-menu-brand {
+            border-bottom: 1px solid rgba(67, 89, 113, .08);
+            margin-bottom: .35rem;
+            padding-bottom: .85rem;
+        }
+
+        .portfolio-menu-logo {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: .75rem;
+            background: #fff;
+            box-shadow: 0 .125rem .375rem rgba(67, 89, 113, .12);
+        }
+
+        .layout-menu .menu-header {
+            margin-top: .55rem;
+        }
+
+        .layout-menu .menu-header-text {
+            color: #8a8c9b;
+            letter-spacing: .02rem;
+        }
+
+        .layout-menu .menu-item.active > .menu-link {
+            font-weight: 600;
+        }
+
+        .layout-menu .menu-link > div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,12 +71,27 @@
                         </a>
                     </div>
 
+                    @php
+                        $navUser = Auth::user();
+                        $roleLabel = $navUser?->role ? ucfirst($navUser->role) : 'Guest';
+                    @endphp
+
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
 
                         <!-- /Search -->
 
+                        <div class="navbar-nav align-items-center me-auto">
+                            <div class="nav-item d-flex flex-column portfolio-navbar-title">
+                                <span class="fw-semibold text-truncate">{{ $pageTitle ?? 'SPK Kenaikan Gaji dan Bonus' }}</span>
+                                <small class="text-muted text-truncate">PT Alvarel Technology Innovation</small>
+                            </div>
+                        </div>
+
                         <ul class="navbar-nav align-items-center ms-auto flex-row">
+                            <li class="nav-item me-3 d-none d-md-flex">
+                                <span class="badge rounded-pill portfolio-demo-badge">Portfolio Demo</span>
+                            </li>
 
 
                             <!-- User -->
@@ -42,7 +102,7 @@
                                         <img src="{{ Auth::check() && Auth::user()->photo
                                             ? asset('storage/' . ltrim(Auth::user()->photo, '/'))
                                             : asset('assets/img/user.png') }}"
-                                            alt="{{ Auth::check() ? Auth::user()->nama : 'User' }}"
+                                            alt="{{ Auth::check() ? Auth::user()->full_name : 'User' }}"
                                             class="rounded-circle"
                                             style="width: 40px; height: 40px; object-fit: cover;" />
                                     </div>
@@ -55,14 +115,13 @@
                                                 <img src="{{ Auth::check() && Auth::user()->photo
                                                     ? asset('storage/' . ltrim(Auth::user()->photo, '/'))
                                                     : asset('assets/img/user.png') }}"
-                                                    alt="{{ Auth::check() ? Auth::user()->nama : 'User' }}"
+                                                    alt="{{ Auth::check() ? Auth::user()->full_name : 'User' }}"
                                                     style="width: 40px; height: 40px; object-fit: cover;"
                                                     class="rounded-circle" />
                                             </div>
                                             <div>
-                                                <h6 class="mb-0">{{ Auth::user()->full_name ?? 'User' }}</h6>
-                                                <small
-                                                    class="text-muted">{{ ucfirst(Auth::user()->role ?? 'Role') }}</small>
+                                                <h6 class="mb-0">{{ $navUser->full_name ?? 'User' }}</h6>
+                                                <small class="text-muted">{{ $roleLabel }}</small>
                                             </div>
                                         </div>
                                     </li>
@@ -71,11 +130,10 @@
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
 
-                                    <!-- Link ke Profil -->
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span>My Profile</span>
+                                        <a class="dropdown-item" href="javascript:void(0);">
+                                            <i class="bx bx-id-card me-2"></i>
+                                            <span>{{ $navUser->username ?? 'demo-user' }}</span>
                                         </a>
                                     </li>
 
@@ -117,7 +175,7 @@
                         <div
                             class="container-xxl d-flex justify-content-between flex-md-row flex-column flex-wrap py-2">
                             <div class="mb-md-0 mb-2">
-                                ©
+                                &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>
