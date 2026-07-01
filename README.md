@@ -169,27 +169,27 @@ Gunakan host yang konsisten. Hindari mencampur `localhost` dan `127.0.0.1` agar 
 
 ## Screenshot Aplikasi
 
-Screenshot aplikasi dapat disimpan pada folder `docs/screenshoots/`.
+Screenshot aplikasi dapat disimpan pada folder `docs/screenshots/`.
 
-![Login](docs/screenshoots/login.png)
+![Login](docs/screenshots/01-auth/login-page.png)
 
-![Dashboard Owner](docs/screenshoots/dashboard-owner.png)
+![Dashboard Owner](docs/screenshots/02-dashboard/dashboard-owner.png)
 
-![Dashboard HR](docs/screenshoots/dashboard-hr.png)
+![Dashboard HR](docs/screenshots/02-dashboard/dashboard-hr.png)
 
-![Dashboard Leader](docs/screenshoots/dashboard-leader.png)
+![Dashboard Leader](docs/screenshots/02-dashboard/dashboard-leader.png)
 
-![Dashboard Karyawan](docs/screenshoots/dashboard-karyawan.png)
+![Dashboard Karyawan](docs/screenshots/02-dashboard/dashboard-karyawan.png)
 
-![KPI Umum](docs/screenshoots/kpi-umum.png)
+![KPI Umum](docs/screenshots/04-kpi-ahp/kpi-umum.png)
 
-![AHP Global](docs/screenshoots/ahp-global.png)
+![AHP Global](docs/screenshots/04-kpi-ahp/ahp-global.png)
 
-![Realisasi KPI Umum](docs/screenshoots/realisasi-kpi-umum.png)
+![Realisasi KPI Umum](docs/screenshots/05-realisasi/realisasi-kpi-umum.png)
 
-![Leaderboard](docs/screenshoots/leaderboard.png)
+![Leaderboard](docs/screenshots/07-rekomendasi/leaderboard.png)
 
-![Rekomendasi Kenaikan Gaji](docs/screenshoots/rekomendasi-kenaikan-gaji.png)
+![Rekomendasi Kenaikan Gaji](docs/screenshots/07-rekomendasi/rekomendasi-kenaikan-gaji.png)
 
 ## Catatan Pengembangan
 
