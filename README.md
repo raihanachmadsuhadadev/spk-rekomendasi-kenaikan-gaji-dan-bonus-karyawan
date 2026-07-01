@@ -1,146 +1,136 @@
 # SPK Kenaikan Gaji dan Bonus Karyawan
 
-Aplikasi Sistem Pendukung Keputusan (SPK) untuk rekomendasi kenaikan gaji dan bonus karyawan pada PT Alvarel Technology Innovation.
+Aplikasi Sistem Pendukung Keputusan (SPK) untuk membantu proses evaluasi performa karyawan, rekomendasi bonus, dan rekomendasi kenaikan gaji pada PT Alvarel Technology Innovation.
 
-Project ini dibuat sebagai aplikasi portfolio berbasis Laravel. Sistem mengelola data karyawan, KPI umum, KPI divisi, penilaian antar karyawan, pembobotan AHP, leaderboard, serta rekomendasi bonus dan kenaikan gaji.
+## Deskripsi Project
+
+SPK Kenaikan Gaji dan Bonus Karyawan adalah aplikasi berbasis web yang membantu pengelolaan evaluasi performa karyawan secara lebih terstruktur. Aplikasi ini mengelola data karyawan, divisi, KPI, realisasi kerja, peer assessment, leaderboard, serta rekomendasi bonus dan kenaikan gaji.
+
+Hasil rekomendasi dari sistem digunakan sebagai bahan pertimbangan bagi pihak terkait, bukan sebagai keputusan mutlak yang menggantikan proses evaluasi manajemen.
+
+## Latar Belakang
+
+Proses evaluasi karyawan membutuhkan data yang konsisten dari berbagai sumber, seperti KPI umum, KPI divisi, realisasi kerja, dan penilaian antar karyawan. Pembobotan kriteria juga diperlukan agar setiap indikator memiliki tingkat kepentingan yang jelas. Aplikasi ini dibuat untuk membantu proses tersebut agar lebih rapi, terukur, dan mudah ditelusuri.
 
 ## Tujuan Aplikasi
 
-Aplikasi ini membantu owner, HR, leader, dan karyawan dalam proses evaluasi performa berbasis data. Penilaian dilakukan melalui kombinasi:
+- Mengelola data karyawan dan divisi.
+- Mengelola KPI umum dan KPI divisi.
+- Mencatat realisasi KPI berdasarkan periode.
+- Mendukung pembobotan kriteria menggunakan AHP.
+- Mengelola peer assessment antar karyawan.
+- Menampilkan leaderboard performa.
+- Menghasilkan rekomendasi bonus.
+- Menghasilkan rekomendasi kenaikan gaji.
 
-- KPI umum
-- KPI divisi
-- Peer assessment
-- Bobot AHP global
-- Realisasi target bulanan
-- Hasil rekomendasi bonus dan kenaikan gaji
+## Role Pengguna
+
+| Role | Fungsi |
+| --- | --- |
+| Owner | Melihat ringkasan performa, leaderboard, dan hasil rekomendasi sebagai bahan pertimbangan. |
+| HR | Mengelola data master, KPI, bobot AHP, aspek penilaian, approval realisasi, dan laporan rekomendasi. |
+| Leader / Kepala Divisi | Mengelola distribusi target KPI divisi dan memantau realisasi anggota divisi. |
+| Karyawan | Mengisi realisasi KPI sesuai akses, mengisi peer assessment, dan melihat informasi performa pribadi. |
 
 ## Fitur Utama
 
-- Login dan logout multi-role
-- Dashboard owner
-- Dashboard HR
-- Dashboard leader
-- Dashboard karyawan
-- Manajemen divisi
-- Manajemen user dan karyawan
-- Manajemen KPI umum
-- Pembobotan KPI umum dengan AHP
-- Realisasi KPI umum
-- Manajemen KPI divisi
-- Pembobotan KPI divisi dengan AHP
-- Distribusi target KPI divisi
-- Realisasi KPI divisi kuantitatif
-- Realisasi KPI divisi kualitatif
-- Realisasi KPI divisi response
-- Realisasi KPI divisi persentase
-- Aspek penilaian karyawan
-- Peer assessment
-- Leaderboard global, karyawan, dan divisi
-- Rekomendasi bonus
-- Rekomendasi kenaikan gaji
+- Authentication dan dashboard multi-role.
+- Manajemen divisi.
+- Manajemen user/karyawan.
+- KPI umum.
+- KPI divisi.
+- Pembobotan AHP.
+- Realisasi KPI umum.
+- Realisasi KPI divisi.
+- Peer assessment.
+- Leaderboard.
+- Rekomendasi bonus.
+- Rekomendasi kenaikan gaji.
+
+## Alur Kerja Sistem
+
+1. HR mengelola data master seperti divisi, user, KPI, dan aspek penilaian.
+2. HR mengatur KPI dan bobot kriteria.
+3. Leader atau karyawan mengisi realisasi sesuai akses masing-masing.
+4. Karyawan mengisi peer assessment sesuai periode penilaian.
+5. Sistem menghitung skor berdasarkan data KPI, bobot, dan penilaian.
+6. Sistem menampilkan leaderboard dan rekomendasi.
+7. Owner dan HR dapat melihat hasil sebagai bahan pertimbangan.
+
+## Metode Yang Digunakan
+
+Aplikasi ini menggunakan KPI sebagai indikator performa, AHP untuk pembobotan kriteria, peer assessment sebagai komponen penilaian, serta perhitungan skor untuk leaderboard dan rekomendasi. Kombinasi metode tersebut membantu proses evaluasi menjadi lebih terstruktur dan berbasis data.
 
 ## Tech Stack
 
-- PHP 8.2+
 - Laravel 12
+- PHP 8.2+
 - PostgreSQL
 - Blade Template
 - Vite
-- Bootstrap/Sneat assets
+- Bootstrap/Sneat Assets
 - Composer
 - NPM
 
-## Periode Demo
+## Struktur Project
 
-Data demo portfolio difokuskan pada:
-
-```text
-Agustus 2025
-```
-
-Gunakan periode tersebut saat mengecek dashboard, realisasi KPI, leaderboard, rekomendasi bonus, dan rekomendasi kenaikan gaji.
+| Folder/File | Keterangan |
+| --- | --- |
+| `app/Http/Controllers` | Berisi controller untuk dashboard, master data, KPI, AHP, realisasi, leaderboard, dan rekomendasi. |
+| `app/Models` | Berisi model Eloquent untuk representasi tabel utama aplikasi. |
+| `database/migrations` | Berisi struktur tabel database. |
+| `database/seeders` | Berisi data awal dan data persiapan periode. |
+| `resources/views` | Berisi Blade view untuk layout, dashboard, tabel, form, dan laporan. |
+| `routes/web.php` | Berisi definisi route aplikasi web. |
+| `public/assets` | Berisi asset UI/template yang digunakan aplikasi. |
 
 ## Instalasi
 
-Clone repository:
-
 ```bash
 git clone <repository-url>
-cd spk_rekomendasi_kenaikan_gaji_dan_bonus-main
-```
-
-Install dependency backend:
-
-```bash
+cd spk-rekomendasi-kenaikan-gaji-dan-bonus-karyawan
 composer install
-```
-
-Install dependency frontend:
-
-```bash
 npm install
-```
-
-Salin file environment:
-
-```bash
 cp .env.example .env
-```
-
-Generate app key:
-
-```bash
 php artisan key:generate
 ```
 
-## Konfigurasi PostgreSQL
+## Konfigurasi Database
 
-Buat database PostgreSQL lokal, misalnya:
-
-```text
-spk_alvarel_portfolio
-```
-
-Atur `.env`:
+Aplikasi menggunakan PostgreSQL. Buat database lokal, lalu sesuaikan konfigurasi `.env`:
 
 ```env
-APP_NAME="SPK Alvarel Portfolio"
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://127.0.0.1:9200
-
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=spk_alvarel_portfolio
 DB_USERNAME=postgres
 DB_PASSWORD=
-
-SESSION_DRIVER=file
-CACHE_STORE=file
-QUEUE_CONNECTION=sync
 ```
 
-Sesuaikan `DB_USERNAME` dan `DB_PASSWORD` dengan konfigurasi PostgreSQL lokal.
+Sesuaikan `DB_USERNAME` dan `DB_PASSWORD` dengan konfigurasi PostgreSQL lokal. Jangan mencantumkan password asli di repository.
 
 ## Migrasi dan Seeder
 
-Reset database dan isi data demo:
+Jalankan migrasi dan seeder utama:
 
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-Bersihkan cache konfigurasi jika diperlukan:
+Seeder utama mengisi data demo awal yang dapat digunakan untuk mencoba fitur dashboard, KPI, leaderboard, dan rekomendasi.
+
+Untuk menyiapkan periode Januari sampai Desember 2026:
 
 ```bash
-php artisan optimize:clear
+php artisan db:seed --class=Period2026PreparationSeeder
 ```
+
+`Period2026PreparationSeeder` menyiapkan data dasar Jan-Des 2026 untuk input manual, seperti KPI, bobot, aspek penilaian, dan distribusi target. Seeder ini tidak mengisi realisasi KPI, peer assessment, atau hasil rekomendasi final.
 
 ## Menjalankan Aplikasi
 
-Jalankan Laravel server:
+Jalankan server Laravel:
 
 ```bash
 php -S 127.0.0.1:9200 -t public
@@ -152,60 +142,58 @@ Jalankan Vite di terminal lain:
 npm run dev
 ```
 
-Buka aplikasi:
+Akses aplikasi melalui:
 
 ```text
 http://127.0.0.1:9200
 ```
 
-Gunakan host yang konsisten. Jangan mencampur `localhost` dan `127.0.0.1` agar session/cookie tidak bermasalah.
+Gunakan host yang konsisten. Hindari mencampur `localhost` dan `127.0.0.1` agar session dan cookie tetap stabil.
 
 ## Akun Demo
 
-Semua akun demo menggunakan password:
+| Role | Username | Password |
+| --- | --- | --- |
+| Owner | owner | password |
+| HR | hradmin | password |
+| Leader Technical Support | saepul | password |
+| Leader Chat Sales | diar | password |
+| Leader Creative Design | cahyono | password |
+| Karyawan | handika | password |
+| Karyawan | devan | password |
+| Karyawan | rizal | password |
+| Karyawan | ariyani | password |
+| Karyawan | akmal | password |
+| Karyawan | ratna | password |
+| Karyawan | laela | password |
 
-```text
-password
-```
+## Screenshot Aplikasi
 
-| Role | Username |
-| --- | --- |
-| Owner | owner |
-| HR | hradmin |
-| Leader Technical Support | saepul |
-| Leader Chat Sales | diar |
-| Leader Creatif Desain | cahyono |
-| Karyawan | handika |
-| Karyawan | devan |
-| Karyawan | rizal |
-| Karyawan | ariyani |
-| Karyawan | akmal |
-| Karyawan | ratna |
-| Karyawan | laela |
+Screenshot aplikasi dapat disimpan pada folder `docs/screenshoots/`.
 
-## Halaman Yang Disarankan Untuk Demo
+![Login](docs/screenshoots/login.png)
 
-Gunakan periode Agustus 2025 saat mengecek halaman berikut:
+![Dashboard Owner](docs/screenshoots/dashboard-owner.png)
 
-- Dashboard HR
-- Dashboard owner
-- Dashboard leader
-- Dashboard karyawan
-- Data Divisi
-- Data User
-- KPI Umum
-- Bobot KPI Umum
-- Realisasi KPI Umum
-- KPI Divisi
-- Bobot KPI Divisi
-- Distribusi Target KPI Divisi
-- Realisasi KPI Divisi
-- Aspek Penilaian
-- Peer Assessment
-- Leaderboard
-- Rekomendasi Bonus
-- Rekomendasi Kenaikan Gaji
+![Dashboard HR](docs/screenshoots/dashboard-hr.png)
 
-## Catatan Portfolio
+![Dashboard Leader](docs/screenshoots/dashboard-leader.png)
 
-Project ini adalah aplikasi skripsi/portfolio lama yang sedang dirapikan secara bertahap. Refactor dilakukan ringan dan aman tanpa mengubah formula SPK/AHP utama, struktur database besar, atau flow role/access aplikasi.
+![Dashboard Karyawan](docs/screenshoots/dashboard-karyawan.png)
+
+![KPI Umum](docs/screenshoots/kpi-umum.png)
+
+![AHP Global](docs/screenshoots/ahp-global.png)
+
+![Realisasi KPI Umum](docs/screenshoots/realisasi-kpi-umum.png)
+
+![Leaderboard](docs/screenshoots/leaderboard.png)
+
+![Rekomendasi Kenaikan Gaji](docs/screenshoots/rekomendasi-kenaikan-gaji.png)
+
+## Catatan Pengembangan
+
+- Aplikasi ini dikembangkan sebagai sistem pendukung keputusan berbasis web.
+- Hasil rekomendasi digunakan sebagai bahan pertimbangan, bukan keputusan mutlak.
+- Pengembangan dapat dilanjutkan dengan validasi data lebih lanjut, pengujian otomatis, dan peningkatan keamanan.
+- Project ini juga digunakan sebagai bahan dokumentasi dan showcase pengembangan aplikasi berbasis Laravel.
