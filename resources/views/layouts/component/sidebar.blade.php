@@ -1,16 +1,23 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    <div class="app-brand demo px-3">
-        <a href="#" class="d-flex align-items-center">
-            <img src="{{ asset('assets/img/alvarel-mini.png') }}" alt="Logo" style="max-height: 48px;" class="me-2" />
-            <span class="fw-bold text-uppercase lh-sm" style="font-size: 11px; line-height: 1.2;">
-                PT ALVAREL TECHNOLOGY INNOVATION
+    <div class="app-brand demo px-3 portfolio-menu-brand">
+        <a href="{{ route('dashboard.index') }}" class="d-flex align-items-center overflow-hidden">
+            <img src="{{ asset('assets/img/alvarel-mini.png') }}" alt="Logo" class="portfolio-menu-logo me-2" />
+            <span class="d-flex flex-column overflow-hidden">
+                <span class="fw-bold text-uppercase text-truncate" style="font-size: 12px;">SPK Alvarel</span>
+                <span class="text-muted text-truncate" style="font-size: 10px;">Gaji & Bonus Karyawan</span>
             </span>
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large d-block d-xl-none ms-auto">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
     </div>
-    <br>
+    @auth
+        <div class="px-3 pb-2">
+            <span class="badge bg-label-primary w-100 text-capitalize">
+                {{ auth()->user()->role }} panel
+            </span>
+        </div>
+    @endauth
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
@@ -29,7 +36,7 @@
                 <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Analytics">User</div>
+                        <div data-i18n="Analytics">Pengguna</div>
                     </a>
                 </li>
 
@@ -40,7 +47,7 @@
                 <li class="menu-item {{ request()->routeIs('realisasi-kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('realisasi-kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi</div>
+                        <div data-i18n="Analytics">Realisasi KPI Umum</div>
                     </a>
                 </li>
 
@@ -58,7 +65,7 @@
                         : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi Target</div>
+                        <div data-i18n="Analytics">Realisasi KPI Divisi</div>
                     </a>
                     <ul class="menu-sub">
                         <li
@@ -100,7 +107,7 @@
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Rekomendasi</span>
+                    <span class="menu-header-text">Laporan & Rekomendasi</span>
                 </li>
                 <li class="menu-item {{ request()->routeIs('bonus.rekomendasi.index') ? 'active' : '' }}">
                     <a href="{{ route('bonus.rekomendasi.index') }}" class="menu-link">
@@ -120,19 +127,19 @@
                 <li class="menu-item {{ request()->routeIs('leaderboard.bulanan.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.bulanan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-trophy"></i>
-                        <div data-i18n="Analytics">Global</div>
+                        <div data-i18n="Analytics">Leaderboard Global</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-medal"></i>
-                        <div data-i18n="Analytics">Karyawan</div>
+                        <div data-i18n="Analytics">Leaderboard Karyawan</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi-kpi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi-kpi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-star"></i>
-                        <div data-i18n="Analytics">Divisi</div>
+                        <div data-i18n="Analytics">Leaderboard Divisi</div>
                     </a>
                 </li>
             @endif
@@ -154,21 +161,21 @@
                 <li class="menu-item {{ request()->routeIs('divisions.index') ? 'active' : '' }}">
                     <a href="{{ route('divisions.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-building-house"></i>
-                        <div data-i18n="Analytics">Division</div>
+                        <div data-i18n="Analytics">Divisi</div>
                     </a>
                 </li>
 
                 <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Analytics">User</div>
+                        <div data-i18n="Analytics">Pengguna</div>
                     </a>
                 </li>
 
                 <li class="menu-item {{ request()->routeIs('ahp.global.index') ? 'active' : '' }}">
                     <a href="{{ route('ahp.global.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-globe"></i>
-                        <div data-i18n="Analytics">Bobot Kriteria</div>
+                        <div data-i18n="Analytics">Bobot Global AHP</div>
                     </a>
                 </li>
 
@@ -179,21 +186,21 @@
                 <li class="menu-item {{ request()->routeIs('kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-data"></i>
-                        <div data-i18n="Analytics">Data</div>
+                        <div data-i18n="Analytics">Data KPI Umum</div>
                     </a>
                 </li>
 
                 <li class="menu-item {{ request()->routeIs('ahp.kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('ahp.kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-analyse"></i>
-                        <div data-i18n="Analytics">Pembobotan</div>
+                        <div data-i18n="Analytics">Bobot KPI Umum</div>
                     </a>
                 </li>
 
                 <li class="menu-item {{ request()->routeIs('realisasi-kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('realisasi-kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi</div>
+                        <div data-i18n="Analytics">Realisasi KPI Umum</div>
                     </a>
                 </li>
 
@@ -204,13 +211,13 @@
                 <li class="menu-item {{ request()->routeIs('kpi-divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('kpi-divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-data"></i>
-                        <div data-i18n="Analytics">Data</div>
+                        <div data-i18n="Analytics">Data KPI Divisi</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('ahp.kpi-divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('ahp.kpi-divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-analyse"></i>
-                        <div data-i18n="Analytics">Pembobotan</div>
+                        <div data-i18n="Analytics">Bobot KPI Divisi</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('distribusi-kpi-divisi.index') ? 'active' : '' }}">
@@ -231,7 +238,7 @@
                         : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi Target</div>
+                        <div data-i18n="Analytics">Realisasi KPI Divisi</div>
                     </a>
                     <ul class="menu-sub">
                         <li
@@ -274,7 +281,7 @@
                 </li>
 
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Penilaian Karyawan</span>
+                    <span class="menu-header-text">Penilaian</span>
                 </li>
 
                 <li class="menu-item {{ request()->routeIs('aspek.index') ? 'active' : '' }}">
@@ -286,11 +293,11 @@
                 <li class="menu-item {{ request()->routeIs('peer.admin.index') ? 'active' : '' }}">
                     <a href="{{ route('peer.admin.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-check-circle"></i>
-                        <div data-i18n="Analytics">Nilai</div>
+                        <div data-i18n="Analytics">Peer Assessment</div>
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Rekomendasi</span>
+                    <span class="menu-header-text">Laporan & Rekomendasi</span>
                 </li>
                 <li class="menu-item {{ request()->routeIs('bonus.rekomendasi.index') ? 'active' : '' }}">
                     <a href="{{ route('bonus.rekomendasi.index') }}" class="menu-link">
@@ -310,19 +317,19 @@
                 <li class="menu-item {{ request()->routeIs('leaderboard.bulanan.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.bulanan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-trophy"></i>
-                        <div data-i18n="Analytics">Global</div>
+                        <div data-i18n="Analytics">Leaderboard Global</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-medal"></i>
-                        <div data-i18n="Analytics">Karyawan</div>
+                        <div data-i18n="Analytics">Leaderboard Karyawan</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi-kpi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi-kpi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-star"></i>
-                        <div data-i18n="Analytics">Divisi</div>
+                        <div data-i18n="Analytics">Leaderboard Divisi</div>
                     </a>
                 </li>
             @endif
@@ -345,7 +352,7 @@
                 <li class="menu-item {{ request()->routeIs('realisasi-kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('realisasi-kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi</div>
+                        <div data-i18n="Analytics">Realisasi KPI Umum</div>
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
@@ -369,7 +376,7 @@
                         : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi Target</div>
+                        <div data-i18n="Analytics">Realisasi KPI Divisi</div>
                     </a>
                     <ul class="menu-sub">
                         <li
@@ -411,7 +418,7 @@
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Rekomendasi</span>
+                    <span class="menu-header-text">Laporan & Rekomendasi</span>
                 </li>
                 <li class="menu-item {{ request()->routeIs('bonus.rekomendasi.index') ? 'active' : '' }}">
                     <a href="{{ route('bonus.rekomendasi.index') }}" class="menu-link">
@@ -431,19 +438,19 @@
                 <li class="menu-item {{ request()->routeIs('leaderboard.bulanan.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.bulanan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-trophy"></i>
-                        <div data-i18n="Analytics">Global</div>
+                        <div data-i18n="Analytics">Leaderboard Global</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-medal"></i>
-                        <div data-i18n="Analytics">Karyawan</div>
+                        <div data-i18n="Analytics">Leaderboard Karyawan</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi-kpi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi-kpi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-star"></i>
-                        <div data-i18n="Analytics">Divisi</div>
+                        <div data-i18n="Analytics">Leaderboard Divisi</div>
                     </a>
                 </li>
             @endif
@@ -464,7 +471,7 @@
                 <li class="menu-item {{ request()->routeIs('realisasi-kpi-umum.index') ? 'active' : '' }}">
                     <a href="{{ route('realisasi-kpi-umum.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi</div>
+                        <div data-i18n="Analytics">Realisasi KPI Umum</div>
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
@@ -481,7 +488,7 @@
                         : '' }}">
                     <a href="javascript:void(0);" class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bx-task"></i>
-                        <div data-i18n="Analytics">Realisasi Target</div>
+                        <div data-i18n="Analytics">Realisasi KPI Divisi</div>
                     </a>
                     <ul class="menu-sub">
                         <li
@@ -525,16 +532,16 @@
                 </li>
 
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Penilaian Karyawan</span>
+                    <span class="menu-header-text">Penilaian</span>
                 </li>
                 <li class="menu-item {{ request()->routeIs('peer.index') ? 'active' : '' }}">
                     <a href="{{ route('peer.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-check-circle"></i>
-                        <div data-i18n="Analytics">Nilai</div>
+                        <div data-i18n="Analytics">Peer Assessment</div>
                     </a>
                 </li>
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">Rekomendasi</span>
+                    <span class="menu-header-text">Laporan & Rekomendasi</span>
                 </li>
                 <li class="menu-item {{ request()->routeIs('bonus.rekomendasi.index') ? 'active' : '' }}">
                     <a href="{{ route('bonus.rekomendasi.index') }}" class="menu-link">
@@ -554,19 +561,19 @@
                 <li class="menu-item {{ request()->routeIs('leaderboard.bulanan.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.bulanan.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-trophy"></i>
-                        <div data-i18n="Analytics">Global</div>
+                        <div data-i18n="Analytics">Leaderboard Global</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-medal"></i>
-                        <div data-i18n="Analytics">Karyawan</div>
+                        <div data-i18n="Analytics">Leaderboard Karyawan</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('leaderboard.divisi-kpi.index') ? 'active' : '' }}">
                     <a href="{{ route('leaderboard.divisi-kpi.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-star"></i>
-                        <div data-i18n="Analytics">Divisi</div>
+                        <div data-i18n="Analytics">Leaderboard Divisi</div>
                     </a>
                 </li>
             @endif
